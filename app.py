@@ -2,7 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import joblib
 import pandas as pd
-
+import os
 
 # ============================================================
 # 1. CARICAMENTO DEL MODELLO
@@ -94,14 +94,14 @@ class PredictionHandler(BaseHTTPRequestHandler):
 # ============================================================
 
 server = HTTPServer(
-    ("localhost", 8000),
+    ("0.0.0.0", int(os.environ.get("PORT", 8000))),
     PredictionHandler
 )
 
 print("==========================================")
 print("PYTHON API AVVIATA")
 print("==========================================")
-print("Server: http://localhost:8000")
+print("Server avviato")
 print("Endpoint: POST /predict")
 print("Premi CTRL+C per fermare il server.")
 
